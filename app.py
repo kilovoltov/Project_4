@@ -80,7 +80,8 @@ class Request(db.Model):
 
 
 class RequestForm(FlaskForm):
-
+    with open('goals.json') as f:
+        goals = json.load(f)
     name = StringField('Вас зовут', validators=[InputRequired(message='Нужно ввести свое имя')])
     phone = StringField('Ваш телефон', validators=[InputRequired(message='Введите номер телефона')])
     goal = RadioField('Какая цель занятий?',
