@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <main class="container mt-5">
+    <div class="col-12 col-sm-10 col-lg-6 offset-lg-3 offset-sm-1">
+    {% if form.errors %}
+    <ul class="text-danger">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+      <form action="{{ url_for('render_request') }}" class="card mb-5" method="post">
+          {{ form.csrf_token }}
+        <div class="card-body text-center pt-5">
+          <h1 class="h3 card-title mt-4 mb-2">Подбор преподавателя</h1>
+          <p class="px-5">Напишите, чего вам нужно и&nbsp;мы&nbsp;подберем отличных&nbsp;ребят</p>
+        </div>
+        <hr>
+        <div class="card-body mx-3">
+          <div class="row">
+            <div class="col">
+              <p>{{ form.goal.label }}</p>
+                {% for field in form.goal %}
+                  <div class="form-check ">
+                    {{ field(class_='form-check-input') }}
+                      {{ field.label(class_='form-check-label') }}
+                  </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+              <p>{{ form.time.label }}</p>
+                {% for field in form.time %}
+                  <div class="form-check ">
+                    {{ field(class_='form-check-input') }}
+                      {{ field.label(class_='form-check-label') }}
+                  </div>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="card-body mx-3">
+            {{ form.name.label(class_='mb-1 mt-2') }}
+            {{ form.name(class_='form-control') }}
+            {{ form.phone.label(class_='mb-1 mt-2') }}
+            {{ form.phone(class_='form-control') }}
+            {{ form.submit(class_='btn btn-primary mt-4 mb-2') }}
+        </div>
+      </form>
+    </div>
+  </main>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <main class="container mt-3 mb-5">
+    <section>
+{% include 'goals.html' %}
+    <h2 class="h5 text-center mb-5">Наши преподаватели</h2>
+    <div class="row">
+      <div class="col-12 col-lg-10 offset-lg-1 m-auto">
+        {% for teacher in teachers%}
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3"><img src="{{ teacher.picture }}" class="img-fluid" alt=""></div>
+              <div class="col-9">
+                <p class="float-right">Рейтинг: {{ teacher.rating }} Ставка: {{ teacher.price }} / час</p>
+                <h2 class="h4">{{ teacher.name }}</h2>
+                <p>{{ teacher.about|truncate(300, false) }}</p>
+                <a href="{{ url_for('render_profile', id=teacher.id) }}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Показать информацю и расписание</a>
+              </div>
+            </div>
+          </div>
+        </div>
+          {% endfor %}
+      </div>
+    </div>
+{% include 'to_request_form.html' %}
+    </section>
+  </main>
+{% endblock %}
