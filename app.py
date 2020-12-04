@@ -148,7 +148,6 @@ def render_profile(id):
 
     with open('days.json', 'r') as f:
         days = json.load(f)
-    print(goals)
     return render_template('profile.html',
                            teacher=teacher,
                            goals=goals,
@@ -157,7 +156,6 @@ def render_profile(id):
 
 @app.route('/booking/<int:id>/<day>/<int:time>/', methods=['GET', 'POST'])
 def render_booking(id, day, time):
-    print(id, day, time)
     teacher = db.session.query(Teacher).get_or_404(id)
     with open('days.json', 'r') as f:
         days = json.load(f)
