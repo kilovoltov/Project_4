@@ -1,6 +1,5 @@
 import json
 import os
-from random import shuffle
 
 from flask import Flask, render_template, abort
 from flask_wtf import FlaskForm
